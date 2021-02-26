@@ -4,8 +4,8 @@ import moduleReducer from "../reducers/module-reducer";
 import lessonReducer from "../reducers/lesson-reducer";
 import {combineReducers, createStore} from "redux";
 import {Provider} from "react-redux";
-import ModuleList from "./module-list";
-import LessonTabs from "./lesson-tabs";
+import ModuleList from "../module-list";
+import LessonTabs from "../lesson-tabs";
 
 const reducer = combineReducers({
   moduleReducer: moduleReducer,
