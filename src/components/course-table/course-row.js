@@ -21,40 +21,29 @@ const CourseRow = (
     updateCourse(newCourse)
   }
 
+  const edit = () => {
+    setEditing(true)
+    setTitle(course.title)
+  }
+
+  const localDeleteCourse = () => {
+    setEditing(false)
+    deleteCourse(course)
+  }
+
   return(
       <tr>
+        <td>{!editing && <Link to="/editor">{course.title}</Link>}
+          {editing && <input className="form-control"
+                onChange={(e) =>
+                    setTitle(e.target.value)}
+                value={title}/>}</td>
+        <td className ="d-none d-md-table-cell">{course.owner}</td>
+        <td className ="d-none d-lg-table-cell">{course.lastModified}</td>
         <td>
-          {
-            !editing &&
-            <Link to="/editor">
-              {course.title}
-            </Link>
-          }
-          {
-            editing &&
-            <input
-                className="form-control"
-                onChange={(e) => setTitle(e.target.value)}
-                value={title}/>
-          }
-        </td>
-        <td>{course.owner}</td>
-        <td>{course.lastModified}</td>
-        <td>
-          <i onClick={() => deleteCourse(course)} className="fas fa-trash"></i>
-          {/*<i onClick={() => setEditing((prevEditing) => !prevEditing)} className="fas fa-edit"></i>*/}
-
-          {
-            editing &&
-            <i onClick={() => saveCourse()} className="fas fa-check"></i>
-          }
-
-          {
-            !editing &&
-            <i onClick={() => setEditing(true)} className="fas fa-edit"></i>
-          }
-
-
+          <i onClick={() => localDeleteCourse(course)} className="fas fa-trash"/>
+          {editing && <i onClick={() => saveCourse()} className="fas fa-check"/>}
+          {!editing && <i onClick={() => edit()} className="fas fa-edit"/>}
         </td>
       </tr>)
 }
