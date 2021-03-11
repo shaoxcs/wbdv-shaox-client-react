@@ -17,8 +17,10 @@ const CourseCard = ({course, deleteCourse, updateCourse}) => {
         <div className="card">
           <img src="https://www.valuecoders.com/blog/wp-content/uploads/2016/08/react.png" alt="Card image cap"/>
           <div className="card-body">
-            {!editing && <Link to="/courses/editor">
-                <h5 className="card-title">{courseTitle}</h5></Link>}
+            {!editing &&
+              <Link to={`/courses/grid/edit/${course._id}`}>
+                <h5 className="card-title">{courseTitle}</h5>
+              </Link>}
             {editing && <input
                   onChange={(event) => setCourseTitle(event.target.value)}
                   value={courseTitle}
@@ -29,7 +31,7 @@ const CourseCard = ({course, deleteCourse, updateCourse}) => {
               {course.title}
             </Link>
             <div className="float-right">
-              {editing && <i onClick={() => deleteCourse(course)} className="fas fa-trash"/>}
+              {editing && <i onClick={() => deleteCourse(course._id)} className="fas fa-trash"/>}
               {editing && <i onClick={() => saveCourse()} className="fas fa-check"/>}
               {!editing && <i onClick={() => setEditing(true)} className="fas fa-edit"/>}
             </div>

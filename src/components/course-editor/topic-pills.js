@@ -5,36 +5,34 @@ import TopicService from "../../services/topic-service";
 import EditableItem from "../editable-item";
 
 const TopicPill = ({
-  topics = [],
+  topics=[],
   updateTopic,
   deleteTopic,
   createTopic,
   findTopicsForLesson,
   resetTopics
 }) => {
-  const {layout, courseId, moduleId, lessonId, topicId} = useParams();
+  const {layout, courseId, moduleId, lessonId} = useParams();
 
   useEffect(() => {
-    if (lessonId !== "undefined" && typeof lessonId !== "undefined") {
+    if (lessonId !== "undefined" && typeof lessonId !== "undefined")
       findTopicsForLesson(lessonId);
-    } else {
+    else
       resetTopics([]);
-    }
   }, [lessonId]);
 
   useEffect(() => {
     console.log("called")
-    if (lessonId !== "undefined" && typeof lessonId !== "undefined") {
+    if (lessonId !== "undefined" && typeof lessonId !== "undefined")
       findTopicsForLesson(lessonId);
-    } else {
+    else
       resetTopics([]);
-    }
   }, [moduleId]);
 
   return (<ul className="nav nav-fill nav-pills">
     {
       topics.map(t =>
-          <li className="nav-item">
+          <li className="nav-item" >
             <Link className="nav-link"
                   data-toggle="tab"
                   role="tab"
@@ -52,11 +50,9 @@ const TopicPill = ({
       )
     }
     <button
-        className="btn btn-outline-dark "
+        className="btn float-right"
         type="button"
-        onClick={() => {
-          createTopic(lessonId)
-        }}>
+        onClick = {() => {createTopic(lessonId)}}>
       <i className="fas fa-plus"></i>
     </button>
   </ul>)
@@ -64,55 +60,53 @@ const TopicPill = ({
 
 const stpm = (state) => {
   return {
-    topics: state.topicReducer.topics
+    topics : state.topicReducer.topics
   }
 }
 
 const dtpm = (dispatch) => {
   return {
-    findTopicsForLesson: (lessonId) => {
+    findTopicsForLesson : (lessonId) => {
       TopicService.findTopicsForLesson(lessonId)
       .then(topics => {
         dispatch({
-          type: "FIND_TOPICS_FOR_LESSON",
+          type : "FIND_TOPICS_FOR_LESSON",
           topics
         });
       });
     },
-    updateTopic: (topic) => {
+    updateTopic : (topic) => {
       TopicService.updateTopic(topic._id, topic)
       .then(status => {
         dispatch({
-          type: "UPDATE_TOPIC",
+          type : "UPDATE_TOPIC",
           topic
         });
       });
     },
-    deleteTopic: (topic) => {
+    deleteTopic : (topic) => {
       TopicService.deleteTopic(topic._id)
       .then(status => {
         dispatch({
-          type: "DELETE_TOPIC",
-          topicToDelete: topic
+          type : "DELETE_TOPIC",
+          topicToDelete : topic
         });
       });
     },
-    createTopic: (lessonId) => {
+    createTopic : (lessonId) => {
       if (lessonId !== "undefined" && typeof lessonId !== "undefined") {
-        TopicService.createTopic(lessonId, {title: "New Topic"})
+        TopicService.createTopic(lessonId, {title : "New Topic"})
         .then(data => {
           dispatch({
-            type: "CREATE_TOPIC",
-            topic: data
+            type : "CREATE_TOPIC",
+            topic : data
           });
         });
-      } else {
-        alert("Please select a lesson");
       }
     },
-    resetTopics: (topics) => {
+    resetTopics : (topics) => {
       dispatch({
-        type: "FIND_TOPICS_FOR_LESSON",
+        type : "FIND_TOPICS_FOR_LESSON",
         topics
       });
     }

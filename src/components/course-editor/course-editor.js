@@ -1,112 +1,71 @@
-import React from 'react'
-import {useHistory, Link} from "react-router-dom"
+import React, {useState, useEffect} from 'react';
+import {Link, useParams, useHistory} from "react-router-dom";
+import {combineReducers, createStore} from "redux";
+import ModuleList from "./module-list";
+import LessonTab from "./lesson-tabs";
+import TopicPill from "./topic-pills";
+import CourseService from "../../services/course-service";
+import moduleReducer from "../../reducers/module-reducer";
+import lessonReducer from "../../reducers/lesson-reducer";
+import topicReducer from "../../reducers/topic-reducer";
+import {Provider} from "react-redux";
 
-const CourseEditor = ({props}) => {
-  let history = useHistory()
+const reducers = combineReducers({
+  moduleReducer,
+  lessonReducer,
+  topicReducer
+});
 
-  return (<div>
-    <div className="container">
-      <div className="row">
-        <div className="col-4">
-          <ul className="nav nav-tabs">
-            <li className="nav-item">
-              <a className="nav-link">
-                <i onClick={() => history.goBack()} className="fa fa-times"></i>
-              </a>
-            </li>
-            <li className="nav-item">
-              <a className="nav-link">CS5610 - WebDev</a>
-            </li>
-          </ul>
-        </div>
+const store = createStore(reducers);
 
-        <div className="col-8">
-          <ul className="nav nav-tabs">
-            <li className="nav-item">
-              <a className="nav-link" href="#">Build</a>
-            </li>
-            <li className="nav-item">
-              <a className="nav-link active" href="#">Pages</a>
-            </li>
-            <li className="nav-item">
-              <a className="nav-link" href="#">Theme</a>
-            </li>
-            <li className="nav-item">
-              <a className="nav-link" href="#">Store</a>
-            </li>
-            <li className="nav-item">
-              <a className="nav-link" href="#">Apps</a>
-            </li>
-            <li className="nav-item">
-              <a className="nav-link" href="#">Settings</a>
-            </li>
-            <li className="nav-item">
-              <a className="nav-link" href="#">
-                <i className="fa fa-plus"></i>
-              </a>
-            </li>
-          </ul>
-        </div>
-      </div>
+const CourseEditor = (props) => {
+  const [courseService, setCourseSevice] = useState(new CourseService());
+  const [course, setCourse] = useState({});
+  const {layout} = useParams();
 
-      <br/>
-        <div className="row">
-          <div className="col-4">
-            <ul className="list-group">
-              <li className="list-group-item">
-                Module 1 - jQuery
-                <i className="pull-right fa fa-times"></i>
-              </li>
-              <li className="list-group-item">
-                Module 2 - React
-                <i className="pull-right fa fa-times"></i>
-              </li>
-              <li className="list-group-item">
-                Module 3 - Redux
-                <i className="pull-right fa fa-times"></i>
-              </li>
-              <li className="list-group-item">
-                Module 4 - Native
-                <i className="pull-right fa fa-times"></i>
-              </li>
-              <li className="list-group-item">
-                Module 5 - Angular
-                <i className="pull-right fa fa-times"></i>
-              </li>
-              <li className="list-group-item">
-                Module 6 - Node
-                <i className="pull-right fa fa-times"></i>
-              </li>
-              <li className="list-group-item">
-                Module 7 - Mongo
-                <i className="pull-right fa fa-times"></i>
-              </li>
-            </ul>
+  useEffect(() => {
+    window.scrollTo(0, 0);
+    courseService.findCourseById(props.match.params.courseId)
+    .then(data => {
+      setCourse(data);
+    });
+  }, []);
+
+  return(
+      <Provider store={store}>
+        <div>
+          <div className="row">
+            <div className="col-3">
+              <ul className="nav nav-tabs">
+                <li className="nav-item">
+                  <Link className="m-2" to={`/courses/${layout}`}>
+                    <i className="fas fa-2x fa-times"></i>
+                  </Link>
+                </li>
+                <li className="nav-item">
+                  <Link to='/' className="nav-link disabled">{course.title}</Link>
+                </li>
+              </ul>
+            </div>
           </div>
+          <div className="row">
+            <div className="col-3">
+              <div className="list-group">
+                <ModuleList />
+              </div>
+            </div>
 
-          <div className="col-8">
-            <ul className="nav nav-pills">
-              <li className="nav-item">
-                <a className="nav-link" href="#">Topic 1</a>
-              </li>
-              <li className="nav-item">
-                <a className="nav-link active" href="#">Topic 2</a>
-              </li>
-              <li className="nav-item">
-                <a className="nav-link" href="#">Topic 3</a>
-              </li>
-              <li className="nav-item">
-                <a className="nav-link" href="#">Topic 4</a>
-              </li>
-              <li className="nav-item">
-                <a className="nav-link" href="#">
-                  <i className="fa fa-plus"></i>
-                </a>
-              </li>
-            </ul>
+            <div className="col-8 mx-2">
+              <div className="row d-inline">
+                <LessonTab />
+              </div>
+              <div className="row d-inline">
+                <TopicPill />
+              </div>
+            </div>
           </div>
         </div>
-    </div>
-  </div>)
+      </Provider>)
 }
+
 export default CourseEditor

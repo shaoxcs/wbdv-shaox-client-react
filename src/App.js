@@ -1,8 +1,8 @@
-import './App.css';
 import CourseManager from "./components/course-manager/course-manager"
 import CourseEditor from "./components/course-editor/course-editor"
-import {BrowserRouter, Switch, Route} from "react-router-dom";
+import {Link, BrowserRouter, Switch, Route} from "react-router-dom";
 import Home from "./components/home"
+import './App.css';
 
 function App() {
   return (
@@ -17,20 +17,19 @@ function App() {
               "/courses/:layout/edit/:courseId/modules/:moduleId/lessons/:lessonId/topics/:topicId"
             ]}
                    exact={true}
-                   render={(props) => <CourseEditor {...props}/>}/>
+                   render={(props) => <CourseEditor {...props}/>} />
             <Route path="/courses/table" exact={true}>
-              <CourseManager/>
+              <CourseManager />
             </Route>
             <Route path="/courses/grid" exact={true}>
-              <CourseManager/>
+              <CourseManager />
             </Route>
             <Route path="/">
-              <Home/>
+              <Home />
             </Route>
           </Switch>
         </div>
-      </BrowserRouter>
-  );
+      </BrowserRouter>);
 }
 
 export default App;

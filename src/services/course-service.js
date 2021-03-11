@@ -1,38 +1,45 @@
-const COURSES_URL = "https://wbdv-generic-server.herokuapp.com/api/001372438/courses";
+class CourseService {
+  constructor() {
+    this.url = "https://wbdv-generic-server.herokuapp.com/api/001372438/courses"
+  }
 
-export const findAllCourses = () =>
-    fetch(COURSES_URL)
-    .then(response => response.json())
+  createCourse(course) {
+    return fetch(this.url, {
+      method : "POST",
+      headers : {
+        "content-type" : "application/json"
+      },
+      body : JSON.stringify(course)
+    }).then(res => res.json())
+  }
 
-export const deleteCourse = (courseId) =>
-    fetch(`${COURSES_URL}/${courseId}`, {
-      method: 'DELETE'
-    })
-    .then(response => response.json())
+  findCourseById(id) {
+    return fetch(`${this.url}/${id}`, {
+      method : "GET"
+    }).then(res => res.json())
+  }
 
-export const createCourse = (course) =>
-    fetch(COURSES_URL, {
-      method: 'POST',
-      body: JSON.stringify(course),
-      headers: {
-        'content-type': 'application/json'
-      }
-    })
-    .then(response => response.json())
+  findAllCourses() {
+    return fetch(this.url)
+    .then(res => res.json())
+  }
 
-export const updateCourse = (courseId, course) =>
-    fetch(`${COURSES_URL}/${courseId}`, {
-      method: 'PUT',
-      body: JSON.stringify(course),
-      headers: {
-        'content-type': 'application/json'
-      }
-    })
-    .then(response => response.json())
+  updateCourse(id, course) {
+    return fetch(`${this.url}/${id}`, {
+      method : "PUT",
+      headers : {
+        "content-type" : "application/json"
+      },
+      body : JSON.stringify(course)
+    }).then(res => res.json())
+  }
 
-export default {
-  findAllCourses,
-  deleteCourse: deleteCourse,
-  createCourse,
-  updateCourse: updateCourse
+  deleteCourse(id) {
+    return fetch(`${this.url}/${id}`, {
+      method : "DELETE"
+    }).then(res => res.json())
+  }
+
 }
+
+export default CourseService
