@@ -9,17 +9,23 @@ function App() {
       <BrowserRouter>
         <div className="App">
           <Switch>
-            <Route path="/courses/table">
-              <CourseManager />
+            <Route path={[
+              "/courses/edit",
+              "/courses/:layout/edit/:courseId",
+              "/courses/:layout/edit/:courseId/modules/:moduleId",
+              "/courses/:layout/edit/:courseId/modules/:moduleId/lessons/:lessonId",
+              "/courses/:layout/edit/:courseId/modules/:moduleId/lessons/:lessonId/topics/:topicId"
+            ]}
+                   exact={true}
+                   render={(props) => <CourseEditor {...props}/>}/>
+            <Route path="/courses/table" exact={true}>
+              <CourseManager/>
             </Route>
-            <Route path="/courses/grid">
-              <CourseManager />
-            </Route>
-            <Route path="/courses/editor">
-              <CourseEditor />
+            <Route path="/courses/grid" exact={true}>
+              <CourseManager/>
             </Route>
             <Route path="/">
-              <Home />
+              <Home/>
             </Route>
           </Switch>
         </div>

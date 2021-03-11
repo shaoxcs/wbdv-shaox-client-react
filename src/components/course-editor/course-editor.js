@@ -50,7 +50,6 @@ const CourseEditor = ({props}) => {
       </div>
 
       <br/>
-
         <div className="row">
           <div className="col-4">
             <ul className="list-group">
