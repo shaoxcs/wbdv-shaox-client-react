@@ -17,29 +17,28 @@ const ModuleList = ({
   }, []);
 
   return (
-      <div className="list">
-        {
-          modules.map(m =>
-              <Link className="list-group-item list-group-item-action rounded-0"
-                    role="tab"
-                    key={m._id}
-                    to={`/courses/${layout}/edit/${courseId}/modules/${m._id}`}>
-                <EditableItem
-                    to={`/courses/${layout}/edit/${courseId}/modules/${m._id}`}
-                    item={m}
-                    updateItem={updateModule}
-                    deleteItem={deleteModule}
-                />
-              </Link>
-          )
-        }
-        <button
-            className="btn btn-primary list-group-item list-group-item-action d-flex justify-content-end"
-            type="button"
-            onClick = {() => {createModule(courseId)}}>
-          <i className="fas fa-plus"></i>
-        </button>
-      </div>
+    <div className="list">
+      {
+        modules.map(m =>
+            <Link className="list-group-item list-group-item-action rounded-0"
+                  role="tab"
+                  key={m._id}
+                  to={`/courses/${layout}/edit/${courseId}/modules/${m._id}`}>
+              <EditableItem
+                  to={`/courses/${layout}/edit/${courseId}/modules/${m._id}`}
+                  item={m}
+                  updateItem={updateModule}
+                  deleteItem={deleteModule}/>
+            </Link>
+        )
+      }
+      <button
+          className="btn btn-primary list-group-item list-group-item-action d-flex justify-content-end"
+          type="button"
+          onClick = {() => {createModule(courseId)}}>
+        <i className="fas fa-plus"/>
+      </button>
+    </div>
   )
 }
 

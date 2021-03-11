@@ -12,19 +12,16 @@ const LessonService = {
       body : JSON.stringify(lesson)
     }).then(res => res.json());
   },
-
   findLessonsForModule : (moduleId) => {
     return fetch(`${urlWithModuleId}/${moduleId}/lessons`, {
       method : "GET",
     }).then(res => res.json());
   },
-
   findLesson : (lessonId) => {
     return fetch(`${urlWithLessonId}/${lessonId}`, {
       method : "GET"
     }).then(res => res.json());
   },
-
   updateLesson : (lessonId, lesson) => {
     return fetch(`${urlWithLessonId}/${lessonId}`, {
       method : "PUT",
@@ -34,7 +31,6 @@ const LessonService = {
       body : JSON.stringify(lesson)
     }).then(res => res.json());
   },
-
   deleteLesson : (lessonId) => {
     return fetch(`${urlWithLessonId}/${lessonId}`, {
       method : "DELETE"

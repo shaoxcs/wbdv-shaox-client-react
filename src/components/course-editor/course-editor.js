@@ -32,40 +32,40 @@ const CourseEditor = (props) => {
   }, []);
 
   return(
-      <Provider store={store}>
-        <div>
-          <div className="row">
-            <div className="col-3">
-              <ul className="nav nav-tabs">
-                <li className="nav-item">
-                  <Link className="m-2" to={`/courses/${layout}`}>
-                    <i className="fas fa-2x fa-times"></i>
-                  </Link>
-                </li>
-                <li className="nav-item">
-                  <Link to='/' className="nav-link disabled">{course.title}</Link>
-                </li>
-              </ul>
+    <Provider store={store}>
+      <div>
+        <div className="row">
+          <div className="col-3">
+            <ul className="nav nav-tabs">
+              <li className="nav-item">
+                <Link className="m-2" to={`/courses/${layout}`}>
+                  <i className="fas fa-2x fa-times"></i>
+                </Link>
+              </li>
+              <li className="nav-item">
+                <Link to='/' className="nav-link disabled">{course.title}</Link>
+              </li>
+            </ul>
+          </div>
+        </div>
+        <div className="row">
+          <div className="col-3">
+            <div className="list-group">
+              <ModuleList />
             </div>
           </div>
-          <div className="row">
-            <div className="col-3">
-              <div className="list-group">
-                <ModuleList />
-              </div>
-            </div>
 
-            <div className="col-8 mx-2">
-              <div className="row d-inline">
-                <LessonTab />
-              </div>
-              <div className="row d-inline">
-                <TopicPill />
-              </div>
+          <div className="col-8 mx-2">
+            <div className="row d-inline">
+              <LessonTab />
+            </div>
+            <div className="row d-inline">
+              <TopicPill />
             </div>
           </div>
         </div>
-      </Provider>)
+      </div>
+    </Provider>)
 }
 
 export default CourseEditor
