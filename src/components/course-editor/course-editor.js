@@ -9,11 +9,14 @@ import moduleReducer from "../../reducers/module-reducer";
 import lessonReducer from "../../reducers/lesson-reducer";
 import topicReducer from "../../reducers/topic-reducer";
 import {Provider} from "react-redux";
+import WidgetList from "./widgets/widget-list";
+import widgetReducer from "../../reducers/widget-reducer";
 
 const reducers = combineReducers({
   moduleReducer,
   lessonReducer,
-  topicReducer
+  topicReducer,
+  widgetReducer
 });
 
 const store = createStore(reducers);
@@ -61,6 +64,7 @@ const CourseEditor = (props) => {
             </div>
             <div className="row d-inline">
               <TopicPill />
+              <WidgetList/>
             </div>
           </div>
         </div>
