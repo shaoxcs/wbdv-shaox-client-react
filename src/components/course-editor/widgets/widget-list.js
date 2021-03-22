@@ -37,20 +37,18 @@ const WidgetList = (
         <ul className="list-group">
           {widgets.map(widget =>
               <li className="list-group-item" key={widget.id}>
-                {widget.id}
-                {
-                  widget.type === "HEADING" &&
+                {widget.type === "HEADING" &&
                   <HeadingWidget
                       updateWidget={updateWidget}
                       deleteWidget={deleteWidget}
-                      widget={widget}/>
-                }
+                      widget={widget}/>}
                 {widget.type === "PARAGRAPH" &&
                   <ParagraphWidget
                       updateWidget={updateWidget}
                       deleteWidget={deleteWidget}
                       widget={widget}/>}
-              </li>)}
+              </li>)
+          }
         </ul>
       </div>
     </div>
