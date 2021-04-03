@@ -1,10 +1,11 @@
 import React, {useEffect, useState} from 'react'
 import {connect} from "react-redux"
-import EditableItem from "../../editable-item"
 import {useParams} from "react-router-dom"
 import widgetService from '../../../services/widget-service'
 import HeadingWidget from "./heading-widget";
+import ListWidget from "./list-widget";
 import ParagraphWidget from "./paragraph-widget";
+import ImageWidget from "./image-widget";
 
 const WidgetList = (
     {
@@ -16,7 +17,8 @@ const WidgetList = (
       clear
     }) => {
 
-  const {layout, topicId, lessonId, widgetId} = useParams();
+  const {layout, courseId, moduleId, lessonId, topicId} = useParams();
+
 
   useEffect(() => {
     if(topicId !== "undefined" && typeof topicId !== "undefined") {
@@ -44,6 +46,16 @@ const WidgetList = (
                       widget={widget}/>}
                 {widget.type === "PARAGRAPH" &&
                   <ParagraphWidget
+                      updateWidget={updateWidget}
+                      deleteWidget={deleteWidget}
+                      widget={widget}/>}
+                {widget.type === "LIST" &&
+                  <ListWidget
+                      updateWidget={updateWidget}
+                      deleteWidget={deleteWidget}
+                      widget={widget}/>}
+                {widget.type === "IMAGE" &&
+                  <ImageWidget
                       updateWidget={updateWidget}
                       deleteWidget={deleteWidget}
                       widget={widget}/>}

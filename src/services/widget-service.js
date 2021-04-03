@@ -1,5 +1,5 @@
 const TOPICS_URL = "https://wbdv-generic-server.herokuapp.com/api/shaox/topics";
-const WIDGETS_URL = "https://webdev-sp2021-shao.herokuapp.com/api";
+const WIDGETS_URL = "http://localhost:8080/api";
 
 export const createWidgetForTopic = (topicId, widget) =>
     fetch(`${WIDGETS_URL}/topics/${topicId}/widgets`, {
