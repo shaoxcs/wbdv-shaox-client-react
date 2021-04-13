@@ -1,33 +1,32 @@
 import React, {useState, useEffect} from "react";
 import {Link, useParams} from "react-router-dom";
+import QuizService from "../../services/quiz-service";
 
 const QuizzesList = () => {
   const {courseId} = useParams()
   const [quizzes, setQuizzes] = useState([])
   useEffect(() => {
-    // TODO: move this to a service file
-    fetch("http://localhost:4000/api/quizzes")
-    .then(response => response.json())
-    .then((quizzes) => {
-      setQuizzes(quizzes)
-    })
+    if (courseId !== "undefined" && typeof courseId !== "undefined") {
+      QuizService.findAllQuizzes()
+      .then(q => setQuizzes(q))
+    }
   }, [])
   return(
       <div>
-        <h2>Quizzes ({quizzes.length})</h2>
-        <ul>
+        <h2>Quizzes</h2>
+        <div className="list-group">
           {
             quizzes.map((quiz) => {
               return(
-                  <li>
-                    <Link to={`/courses/${courseId}/quizzes/${quiz._id}`}>
-                      {quiz.title}
-                    </Link>
-                  </li>
+                  <Link
+                      to={`/courses/${courseId}/quizzes/${quiz._id}`}
+                      className="list-group-item">
+                    {quiz.title}
+                  </Link>
               )
             })
           }
-        </ul>
+        </div>
       </div>
   );
 }
