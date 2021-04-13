@@ -37,6 +37,11 @@ const CourseRow = ({course, deleteCourse, updateCourse}) => {
       <td className ="d-none d-md-table-cell">{course.owner}</td>
       <td className ="d-none d-lg-table-cell">{course.lastModified}</td>
       <td>
+        <Link to={`/courses/${course._id}/quizzes`}>
+          Quizzes
+        </Link>
+      </td>
+      <td>
         {editing && <i onClick={() => localDeleteCourse()} className="fas fa-trash"></i>}
         {editing && <i onClick={() => saveCourse()} className="fas fa-check"></i>}
         {!editing && <i onClick={() => editCourse()} className="fas fa-edit"></i>}
