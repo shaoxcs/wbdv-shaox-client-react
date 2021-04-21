@@ -1,7 +1,7 @@
 import React, {useState} from "react";
 
-const MultipleChoiceQuestion = ({question, answer, setAnswer, submitted, setSubmitted}) => {
-  const [yourAnswer, setYourAnswer] = useState("")
+const MultipleChoiceQuestion = ({question, answer, setAnswer, submitted}) => {
+
   return(
     <ul className="list-group">
       {
@@ -10,7 +10,7 @@ const MultipleChoiceQuestion = ({question, answer, setAnswer, submitted, setSubm
             <li className={
               `list-group-item
               ${(submitted !== null && submitted === choice) ? "selected" : ""}
-              ${(question.correct === choice && submitted !== null) ? "correct" : ""}`}
+              ${(submitted !== null && question.correct === choice) ? "correct" : ""}`}
                 key={idx}>
               <input type="radio"
                      name={question._id}
