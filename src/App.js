@@ -4,6 +4,7 @@ import {Link, BrowserRouter, Switch, Route} from "react-router-dom";
 import Home from "./components/home"
 import QuizzesList from "./components/quizzes/quizzes-list";
 import Quiz from "./components/quizzes/quiz";
+import QuizAttempts from "./components/quiz-attempt/quiz-attempt"
 import './App.css';
 
 function App() {
@@ -28,6 +29,9 @@ function App() {
             </Route>
             <Route path="/courses/:courseId/quizzes/:quizId" exact={true}>
               <Quiz/>
+            </Route>
+            <Route path="/courses/:courseId/quizzes/:quizId/attempts" exact={true}>
+              <QuizAttempts />
             </Route>
             <Route path="/courses/grid" exact={true}>
               <CourseManager />
