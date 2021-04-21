@@ -9,8 +9,8 @@ const MultipleChoiceQuestion = ({question, answer, setAnswer, submitted}) => {
           return (
             <li className={
               `list-group-item
-              ${(submitted !== null && submitted === choice) ? "selected" : ""}
-              ${(submitted !== null && question.correct === choice) ? "correct" : ""}`}
+              ${(submitted != null && submitted === choice) ? "selected" : ""}
+              ${(submitted != null && question.correct === choice) ? "correct" : ""}`}
                 key={idx}>
               <input type="radio"
                      name={question._id}

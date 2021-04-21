@@ -5,8 +5,8 @@ const TrueFalseQuestion = ({question, answer, setAnswer, submitted, setSubmitted
     <div>
       <ul className="list-group">
         <li className={`list-group-item
-                       ${(submitted !== null && submitted === "true") ? "selected" : ""}
-                       ${(question.correct === "true" && submitted !== null) ? "correct" : ""}
+                       ${(submitted != null && submitted === "true") ? "selected" : ""}
+                       ${(question.correct === "true" && submitted != null) ? "correct" : ""}
                       `}>
           <input
               type="radio"
@@ -19,8 +19,8 @@ const TrueFalseQuestion = ({question, answer, setAnswer, submitted, setSubmitted
           True
         </li>
         <li className={`list-group-item 
-                       ${(submitted !== null && submitted === "false") ? "selected" : ""}
-                       ${(question.correct === "false" && submitted !== null) ? "correct" : ""}
+                       ${(submitted != null && submitted === "false") ? "selected" : ""}
+                       ${(question.correct === "false" && submitted != null) ? "correct" : ""}
                       `}>
           <input type="radio"
               onClick={() => {

@@ -7,7 +7,7 @@ const QuizAttemptService = {
   },
 
   submitAttemptForQuiz: (quizId, questions) => {
-    return fetch(`http://localhost:4000/api/quizzes/${quizId}/attempts`,
+    return fetch(`https://webdev-shaox-backend-node.herokuapp.com/api/quizzes/${quizId}/attempts`,
         {
           method: 'POST',
           body: JSON.stringify(questions),
